@@ -9,6 +9,8 @@ public class AddressBookService {
 
 	ArrayList<ContactDetails> addressBookList = new ArrayList<ContactDetails>();
 
+	int flag = 0;
+
 	public void addContact() {
 
 		//taking input from user to create new contact
@@ -45,11 +47,13 @@ public class AddressBookService {
 
 		System.out.println("enter first name to edit that contact");
 		String toeditContact = sc.nextLine();
-
+		
 		// searching for firstname to edit that contact
 		for(ContactDetails contact:addressBookList) {
+			
 			// if first name matches then edit that contact
 			if(contact.getFirstName().equalsIgnoreCase(toeditContact)) {
+				flag = 1;
 				System.out.println("Enter below number to edit that detail \n"
 						+"1.firstName \n"
 						+"2.lastName \n"
@@ -99,11 +103,30 @@ public class AddressBookService {
 				default:
 					System.out.println("Enter valid input");	   
 				}
+			}
+		}
+		if(flag == 0){
+			System.out.println("Entered name not found");
+		}
+	}
 
+	public void deleteContact() {
+		System.out.println("enter first name to delete that contact");
+		String todeleteContact = sc.nextLine();
+		
+		// searching for firstname to delete that contact
+		for(ContactDetails contact:addressBookList) {
+			
+			// if first name matches then delete that contact
+			if(contact.getFirstName().equalsIgnoreCase(todeleteContact)) {
+				flag = 1;
+				addressBookList.remove(contact);
+				System.out.println("contact deleted successfully");
+				break;
 			}
-			else {
-				System.out.println("Entered name not found");
-			}
-		}	
+		}
+		if(flag == 0) {
+			System.out.println("Entered name not found");
+		}
 	}
 }
