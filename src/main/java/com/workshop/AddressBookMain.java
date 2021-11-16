@@ -1,54 +1,42 @@
 package com.workshop;
 
-import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class AddressBookMain {
 
-	Scanner sc = new Scanner(System.in);
-
-	static ArrayList<ContactDetails> addressBookList = new ArrayList<ContactDetails>();
-
-	public void addContact() {
+	public static void main(String[] args){
 		
-		//taking input from user to create new contact
-		System.out.println("enter first name");
-		String firstName = sc.nextLine();
-
-		System.out.println("enter last name");
-		String lastName = sc.nextLine();
-
-		System.out.println("enter address");
-		String address = sc.nextLine();
-
-		System.out.println("enter city");
-		String city = sc.nextLine();
-
-		System.out.println("enter state");
-		String state = sc.nextLine();
-
-		System.out.println("enter zip code");
-		String zip = sc.nextLine();
-
-		System.out.println("enter phone number");
-		String phoneNo = sc.nextLine();
-
-		System.out.println("enter email Id");
-		String emailId = sc.nextLine();
-
-		ContactDetails createNewContact = new ContactDetails(firstName, lastName, address, city, state, zip, phoneNo, emailId);
-		addressBookList.add(createNewContact);
-	}
-
-	public static void main(String[] args) {
-
-		AddressBookMain addressBookmain = new AddressBookMain();
+		Scanner sc = new Scanner(System.in);
+		AddressBookService addressBookService = new AddressBookService();
 
 		ContactDetails createNewContact = new ContactDetails("Shivam","Mishra","Pimpri","Pune","Mah","411039","8830466378","Shivam@gmail.com");
-		addressBookList.add(createNewContact);
-		addressBookmain.addContact();
-		System.out.println(addressBookList);
 
+		// storing contact in addressBookList
+		addressBookService.addressBookList.add(createNewContact);
+
+		System.out.println("Enter 1 to add new contact \n"+
+				"Enter 2 to edit contact \n"+
+				"Enter 0 to exit");
+		try {
+			int operation = sc.nextInt();
+			switch(operation) {
+			case 1:
+				addressBookService.addContact();
+				break;
+			case 2:
+				addressBookService.editContact();
+				break;
+			case 0:
+				break;
+			default:
+				System.out.println("Enter valid input");
+			}
+
+			System.out.println(addressBookService.addressBookList);
+		}
+		catch(InputMismatchException e) {
+			System.out.println("Enter valid input");
+		}	
 	}
-
 }
