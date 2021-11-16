@@ -20,7 +20,7 @@ public class ContactDetails {
 
 	@Override
 	public String toString() {
-		return "ContactList [firstName=" + firstName + ", lastName=" + lastName + ", address=" + address + ", city="
-				+ city + ", state=" + state + ", zip=" + zip + ", phoneNo=" + phoneNo + ", emailId=" + emailId + "]";
+		return "Contacts ["+firstName + ", " + lastName + ", " + phoneNo +", " + address + ", "
+				+ city + ", " + state + ", " + zip + ", " + emailId + "]\n";
 	}
 }
