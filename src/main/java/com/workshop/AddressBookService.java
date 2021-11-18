@@ -7,11 +7,9 @@ public class AddressBookService {
 
 	Scanner sc = new Scanner(System.in);
 
-	ArrayList<ContactDetails> addressBookList = new ArrayList<ContactDetails>();
+	ArrayList<ContactDetails> addressBookList = new ArrayList<ContactDetails>(); 
 
-	int flag = 0;
-
-	public void addContact() {
+	public void createContact() {
 
 		//taking input from user to create new contact
 		System.out.println("enter first name");
@@ -41,11 +39,12 @@ public class AddressBookService {
 		ContactDetails createNewContact = new ContactDetails(firstName, lastName, address, city, state, zip, phoneNo, emailId);
 		// storing contact in addressBookList
 		addressBookList.add(createNewContact);
-		
-		System.out.println("Do you want to enter more contact? \nPress 1 to add  to exit press any key");
-		int addInput = Integer.parseInt(sc.nextLine());
-		if(addInput == 1) {
-			addContact();
+		System.out.println("Contact added successfully");
+		System.out.println("To add more contact press 1");
+		int addMore = sc.nextInt();
+		if(addMore == 1) {
+			sc.nextLine();
+			createContact();
 		}
 	}
 
@@ -53,6 +52,7 @@ public class AddressBookService {
 
 		System.out.println("enter first name to edit that contact");
 		String toeditContact = sc.nextLine();
+		int flag = 0;
 		
 		// searching for firstname to edit that contact
 		for(ContactDetails contact:addressBookList) {
@@ -119,7 +119,7 @@ public class AddressBookService {
 	public void deleteContact() {
 		System.out.println("enter first name to delete that contact");
 		String todeleteContact = sc.nextLine();
-		
+		int flag = 0;
 		// searching for firstname to delete that contact
 		for(ContactDetails contact:addressBookList) {
 			

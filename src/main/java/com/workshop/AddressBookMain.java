@@ -6,45 +6,54 @@ import java.util.Scanner;
 public class AddressBookMain {
 
 	public static void main(String[] args){
-		
+
 		Scanner sc = new Scanner(System.in);
-		AddressBookService addressBookService = new AddressBookService();
+		MultiAddressBook multiAddressBook = new MultiAddressBook();
 
-		ContactDetails createNewContact1 = new ContactDetails("Shivam","Mishra","Pimpri","Pune","Mah","411039","8830466378","Shivam@gmail.com");
-		ContactDetails createNewContact2 = new ContactDetails("Shiv","Kaka","Pimpri","Pune","Mah","411039","8830466378","Shivam@gmail.com");
-
-		// storing contact in addressBookList
-		addressBookService.addressBookList.add(createNewContact1);
-		addressBookService.addressBookList.add(createNewContact2);
-
-		System.out.println("Enter following number to perform that task \n"+
-						   "1. add new contact \n"+
-						   "2. edit existing contact \n"+
-						   "3. delete contact \n"+
-				           "0. exit");
-		try {
-			int operation = sc.nextInt();
-			switch(operation) {
-			case 1:
-				addressBookService.addContact();
-				break;
-			case 2:
-				addressBookService.editContact();
-				break;
-			case 3:
-				addressBookService.deleteContact();
-				break;
-				
-			case 0:
-				break;
-			default:
+		while(true) {
+			System.out.println("Enter following number to perform that task \n"+
+					"1. Add new AddressBook \n"+
+					"2. Add contact in existing AddressBook \n"+
+					"3. Edit the contact in existing AddressBook \n"+
+					"4. Delete the contact in AddressBook \n"+
+					"5. Delete the AddressBook \n"+
+					"6. Print the AddressBook \n"+
+					"7. Print the contacts in AddressBook \n"+
+					"0. 0. Exit Applcation");
+			try {
+				int operation = sc.nextInt();
+				switch(operation) {
+				case 1:
+					multiAddressBook.addAddressBook();
+					break;
+				case 2:
+					multiAddressBook.addContact();
+					break;
+				case 3:
+					multiAddressBook.editContactInBook();
+					break;
+				case 4:
+					multiAddressBook.deleteContactInBook();
+					break;
+				case 5:
+					multiAddressBook.deleteAddressBook();
+					break;
+				case 6:
+					multiAddressBook.printBook();
+					break;
+				case 7:
+					multiAddressBook.printContactsInBook();
+					break;
+				case 0:
+					break;
+				default:
+					System.out.println("Enter valid input");
+					continue;
+				}
+			}
+			catch(InputMismatchException e) {
 				System.out.println("Enter valid input");
 			}
-
-			System.out.println(addressBookService.addressBookList);
 		}
-		catch(InputMismatchException e) {
-			System.out.println("Enter valid input");
-		}	
 	}
 }

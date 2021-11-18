@@ -1,10 +1,12 @@
 package com.workshop;
 
-public class ContactDetails {
+public class ContactDetails{
 
 	//variables
 	private String firstName, lastName, address, city, state, zip, phoneNo, emailId;
 
+	public ContactDetails() {}
+	
 	public ContactDetails(String firstName, String lastName, String address, String city, String state, String zip,
 			String phoneNo, String emailId) {
 		super();
