@@ -41,6 +41,12 @@ public class AddressBookService {
 		ContactDetails createNewContact = new ContactDetails(firstName, lastName, address, city, state, zip, phoneNo, emailId);
 		// storing contact in addressBookList
 		addressBookList.add(createNewContact);
+		
+		System.out.println("Do you want to enter more contact? \nPress 1 to add  to exit press any key");
+		int addInput = Integer.parseInt(sc.nextLine());
+		if(addInput == 1) {
+			addContact();
+		}
 	}
 
 	public void editContact() {
