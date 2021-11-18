@@ -8,7 +8,6 @@ public class MultiAddressBook {
 
 	Map<String, AddressBookService> multiAddressBookDetails = new HashMap<String, AddressBookService>();
 	Scanner scanner = new Scanner(System.in);
-	AddressBookService addressBookService = new AddressBookService();
 	
 	public void addAddressBook() {
 		System.out.println("Enter Name of new Address Book: ");
