@@ -7,6 +7,7 @@ import java.util.Scanner;
 public class MultiAddressBook {
 
 	Map<String, AddressBookService> multiAddressBookDetails = new HashMap<String, AddressBookService>();
+	AddressBookService addressBookService = new AddressBookService();
 	Scanner scanner = new Scanner(System.in);
 	
 	public void addAddressBook() {
@@ -69,6 +70,31 @@ public class MultiAddressBook {
 		} else {
 			System.out.println("AddressBook doesn't exist!!");
 			deleteContactInBook();
+		}
+	}
+	
+	//search contacts using city or state name
+	public void searchContacts() {
+		while (true) {
+			System.out.println("Enter\n 1. By city\n 2. By state\n 0. for previous menu");
+			int choice = scanner.nextInt();
+			scanner.nextLine();
+			switch (choice) {
+			case 1:
+				System.out.println("Enter city: ");
+				String city = scanner.nextLine();
+				addressBookService.searchByCity(city);
+				break;
+			case 2:
+				System.out.println("Enter state: ");
+				String state = scanner.nextLine();
+				addressBookService.searchByState(state);
+				break;
+			case 0:
+				return;
+			default:
+				System.out.println("Entered choice is incorrect!.. please enter correct choice");
+			}
 		}
 	}
 

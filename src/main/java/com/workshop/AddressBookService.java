@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 
 public class AddressBookService {
 
-	Scanner sc = new Scanner(System.in);
+	Scanner scanner = new Scanner(System.in);
 
 	ArrayList<ContactDetails> addressBookList = new ArrayList<ContactDetails>(); 
 
@@ -15,7 +15,7 @@ public class AddressBookService {
 		boolean found = false;
 		//taking input from user to create new contact
 		System.out.println("enter first name");
-		String firstName = sc.nextLine();
+		String firstName = scanner.nextLine();
 
 		//checking for duplicate name in the address book
 		for (int j = 0; j < addressBookList.size(); j++) {
@@ -37,34 +37,34 @@ public class AddressBookService {
 		else {
 
 			System.out.println("enter last name");
-			String lastName = sc.nextLine();
+			String lastName = scanner.nextLine();
 
 			System.out.println("enter address");
-			String address = sc.nextLine();
+			String address = scanner.nextLine();
 
 			System.out.println("enter city");
-			String city = sc.nextLine();
+			String city = scanner.nextLine();
 
 			System.out.println("enter state");
-			String state = sc.nextLine();
+			String state = scanner.nextLine();
 
 			System.out.println("enter zip code");
-			String zip = sc.nextLine();
+			String zip = scanner.nextLine();
 
 			System.out.println("enter phone number");
-			String phoneNo = sc.nextLine();
+			String phoneNo = scanner.nextLine();
 
 			System.out.println("enter email Id");
-			String emailId = sc.nextLine();
+			String emailId = scanner.nextLine();
 
 			ContactDetails createNewContact = new ContactDetails(firstName, lastName, address, city, state, zip, phoneNo, emailId);
 			// storing contact in addressBookList
 			addressBookList.add(createNewContact);
 			System.out.println("Contact added successfully");
 			System.out.println("To add more contact press 1");
-			int addMore = sc.nextInt();
+			int addMore = scanner.nextInt();
 			if(addMore == 1) {
-				sc.nextLine();
+				scanner.nextLine();
 				createContact();
 			}
 		}
@@ -73,7 +73,7 @@ public class AddressBookService {
 	public void editContact() {
 
 		System.out.println("enter first name to edit that contact");
-		String toeditContact = sc.nextLine();
+		String toeditContact = scanner.nextLine();
 		int flag = 0;
 
 		// searching for firstname to edit that contact
@@ -92,40 +92,40 @@ public class AddressBookService {
 						+ "7.phoneNo \n"
 						+ "8.emailId");
 
-				int editInput = sc.nextInt();
+				int editInput = scanner.nextInt();
 
 				switch(editInput) {
 				case 1:
 					System.out.println("Enter new first name");
-					contact.setFirstName(sc.next());
+					contact.setFirstName(scanner.next());
 					break;
 				case 2:
 					System.out.println("Enter new last name");
-					contact.setLastName(sc.next());
+					contact.setLastName(scanner.next());
 					break;
 				case 3:
 					System.out.println("Enter new address");
-					contact.setAddress(sc.next());
+					contact.setAddress(scanner.next());
 					break;
 				case 4:
 					System.out.println("Enter new city");
-					contact.setFirstName(sc.next());
+					contact.setFirstName(scanner.next());
 					break;
 				case 5:
 					System.out.println("Enter new state");
-					contact.setState(sc.next());
+					contact.setState(scanner.next());
 					break;
 				case 6:
 					System.out.println("Enter new zip");
-					contact.setZip(sc.next());
+					contact.setZip(scanner.next());
 					break;
 				case 7:
 					System.out.println("Enter new phoneNo");
-					contact.setPhoneNo(sc.next());
+					contact.setPhoneNo(scanner.next());
 					break;
 				case 8:
 					System.out.println("Enter new emailId");
-					contact.setAddress(sc.next());
+					contact.setAddress(scanner.next());
 					break;
 
 				default:
@@ -140,7 +140,7 @@ public class AddressBookService {
 
 	public void deleteContact() {
 		System.out.println("enter first name to delete that contact");
-		String todeleteContact = sc.nextLine();
+		String todeleteContact = scanner.nextLine();
 		int flag = 0;
 		// searching for firstname to delete that contact
 		for(ContactDetails contact:addressBookList) {
@@ -157,4 +157,20 @@ public class AddressBookService {
 			System.out.println("Entered name not found");
 		}
 	}
+	
+	//search contact by city name
+		public void searchByCity(String city) {
+			List<ContactDetails> collect = addressBookList.stream().filter(contactInfo -> contactInfo.getCity().equalsIgnoreCase(city)).collect(Collectors.toList());
+			for (ContactDetails contact : collect) {
+				System.out.println("Search result: " + contact);
+			}
+		}
+
+		//search contact by state name
+		public void searchByState(String state) {
+			List<ContactDetails> collect = addressBookList.stream().filter(contactInfo -> contactInfo.getState().equalsIgnoreCase(state)).collect(Collectors.toList());
+			for (ContactDetails contact : collect) {
+				System.out.println("Search result: " + contact);
+			}
+		}
 }
