@@ -9,7 +9,8 @@ public class AddressBookService {
 
 	Scanner scanner = new Scanner(System.in);
 
-	ArrayList<ContactDetails> addressBookList = new ArrayList<ContactDetails>(); 
+	static List<ContactDetails> addressBookList = new ArrayList<ContactDetails>(); 
+	ContactDetails contactDetails = new ContactDetails();
 
 	public void createContact() {
 		boolean found = false;
@@ -159,18 +160,18 @@ public class AddressBookService {
 	}
 	
 	//search contact by city name
-		public void searchByCity(String city) {
-			List<ContactDetails> collect = addressBookList.stream().filter(contactInfo -> contactInfo.getCity().equalsIgnoreCase(city)).collect(Collectors.toList());
-			for (ContactDetails contact : collect) {
-				System.out.println("Search result: " + contact);
-			}
+	public void searchByCity(String city) {
+		List<ContactDetails> collect = addressBookList.stream().filter(p -> p.getCity().equalsIgnoreCase(city)).collect(Collectors.toList());
+		for (ContactDetails contact : collect) {
+			System.out.println("Search result: " + contact);
 		}
+	}
 
-		//search contact by state name
-		public void searchByState(String state) {
-			List<ContactDetails> collect = addressBookList.stream().filter(contactInfo -> contactInfo.getState().equalsIgnoreCase(state)).collect(Collectors.toList());
-			for (ContactDetails contact : collect) {
-				System.out.println("Search result: " + contact);
-			}
+	//search contact by state name
+	public void searchByState(String state) {
+		List<ContactDetails> collect = addressBookList.stream().filter(p -> p.getState().equalsIgnoreCase(state)).collect(Collectors.toList());
+		for (ContactDetails contact : collect) {
+			System.out.println("Search result: " + contact);
 		}
+	}
 }

@@ -16,7 +16,7 @@ public class AddressBookMain {
 					"2. Add contact in existing AddressBook \n"+
 					"3. Edit the contact in existing AddressBook \n"+
 					"4. Delete the contact in AddressBook \n"+
-					"5. Delete the AddressBook\n " +
+					"5. Delete the AddressBook\n" +
 					"6. Search Contact By City or State in AddressBook\n"+
 					"7. Print the AddressBook \n"+
 					"8. Print the contacts in AddressBook \n"+

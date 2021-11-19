@@ -1,13 +1,16 @@
 package com.workshop;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
 public class MultiAddressBook {
 
-	Map<String, AddressBookService> multiAddressBookDetails = new HashMap<String, AddressBookService>();
+	HashMap<String, AddressBookService> multiAddressBookDetails = new HashMap<String, AddressBookService>();
 	AddressBookService addressBookService = new AddressBookService();
+	ContactDetails contactDetails = new ContactDetails();
 	Scanner scanner = new Scanner(System.in);
 	
 	public void addAddressBook() {
@@ -29,6 +32,7 @@ public class MultiAddressBook {
 	}
 	
 	public void addContact() {
+		scanner.nextLine();
 		System.out.println("Enter the name of Address book to add the contact.");
 		String addressBookname = scanner.nextLine();
 		if(multiAddressBookDetails.containsKey(addressBookname)) {
@@ -114,5 +118,4 @@ public class MultiAddressBook {
 		}
 		System.out.println(" ");
 	}
-	
 }
