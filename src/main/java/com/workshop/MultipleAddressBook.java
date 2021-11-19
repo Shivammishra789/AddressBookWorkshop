@@ -15,6 +15,8 @@ public class MultipleAddressBook {
 
 	static final String FILE_PATH = "ContactDetails.txt";
 	static final String CSV_FILE_PATH = "ContactDetails.csv";
+	static final String JSON_FILE_PATH = "ContactDetails.json";
+	
 	PersonInformation person = new PersonInformation();
 	List<PersonInformation> contactList = new ArrayList<>();
 	HashMap<String, Contact> contactService = new HashMap<>();
@@ -265,8 +267,9 @@ public class MultipleAddressBook {
 	//choose option to read and write csv file
 		public void readAndWriteFile() throws IOException {
 			while (true) {
-				System.out.println("Enter\n 1. Write in Txt File\n 2. Read from Txt File\n "+
-								   		   "3. Write in Csv File\n 4.  Read from Csv File\n"
+				System.out.println("Enter\n 1. Write in Txt File\n 2. Read from Txt File\n"+
+								   		   "3. Write in Csv File\n 4.  Read from Csv File\n"+
+								   		   "5. Write in Json File\n 6.  Read from Json File\n"
 								         + " 0. for previous menu");
 				int choice = scanner.nextInt();
 				scanner.nextLine();
@@ -282,6 +285,12 @@ public class MultipleAddressBook {
 					break;
 				case 4:
 					readFromCsvFile();
+					break;
+				case 5:
+					writeToJsonFile();
+					break;
+				case 6:
+					readFromJsonFile();
 					break;
 				case 0:
 					return;
@@ -348,6 +357,35 @@ public class MultipleAddressBook {
 			sc.useDelimiter("\\Z");
 			System.out.println(sc.next() +" ");
 			sc.close();
+		}
+		
+		public void writeToJsonFile() throws IOException {
+			FileWriter fw = new FileWriter(JSON_FILE_PATH);
+			System.out.println("File Writing Started");
+
+			for (Map.Entry<String, Contact> entry : contactService.entrySet()) {
+				fw.write("The contacts in the Book of < ''" + entry.getKey() + "'' > are : \n");
+				List<PersonInformation> contList = entry.getValue().contactList;
+				for(int i=0;i<contList.size();i++) {
+					fw.write("	{ First Name :" + contList.get(i).getFirstName() + 
+							", Last Name :" + contList.get(i).getLastName() + 
+							", Address : " + contList.get(i).getAddress() +
+							", City : " + contList.get(i).getCity() +
+							", State : " + contList.get(i).getState() + 
+							", Zip : " + contList.get(i).getZip() + 
+							", Phone Number : " + contList.get(i).getPhoneNo() +
+							", Email ID : " + contList.get(i).getEmailId()+" }\n");
+				}
+			}
+			fw.close();
+			System.out.println("File Writing closed");
+		}
+		public void readFromJsonFile() throws IOException {
+			FileReader fileReader = new FileReader(FILE_PATH);
+			Scanner scanfile = new Scanner(fileReader);
+			scanfile.useDelimiter("\\Z");
+			System.out.println(scanfile.next() +" ");
+			scanfile.close();
 		}
 	
 	
