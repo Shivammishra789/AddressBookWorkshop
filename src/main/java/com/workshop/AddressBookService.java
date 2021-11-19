@@ -178,4 +178,22 @@ public class AddressBookService {
 			System.out.println("Search result: " + contact);
 		}
 	}
+	
+	//count contact by city name
+		public void countByCity(String cityName) {
+			long count = addressBookList.stream()
+					                    .filter(g -> g.getCity()
+					                    .equalsIgnoreCase(cityName))
+					                    .count();
+			System.out.println("Total Number of Contact from '" + cityName + "' city is " + count);
+		}
+		
+		//count contact by state name
+		public void countByState(String stateName) {
+			long count1 = addressBookList.stream()
+					                     .filter(g -> g.getState()
+					                     .equalsIgnoreCase(stateName))
+					                     .count();
+			System.out.println("Total Number of Contact from '" + stateName + "' state is " + count1);
+		}
 }

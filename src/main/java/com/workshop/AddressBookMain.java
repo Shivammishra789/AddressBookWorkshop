@@ -18,8 +18,9 @@ public class AddressBookMain {
 					"4. Delete the contact in AddressBook \n"+
 					"5. Delete the AddressBook\n" +
 					"6. Search Contact By City or State in AddressBook\n"+
-					"7. Print the AddressBook \n"+
-					"8. Print the contacts in AddressBook \n"+
+					"7. Count Number of Contacts By City or State in AddressBook\n"+
+					"8. Print the AddressBook \n"+
+					"9. Print the contacts in AddressBook \n"+
 					"0. Exit Applcation");
 			try {
 				int operation = sc.nextInt();
@@ -43,9 +44,12 @@ public class AddressBookMain {
 					multiAddressBook.searchContacts();
 					break;
 				case 7:
-					multiAddressBook.printBook();
+					multiAddressBook.countContacts();
 					break;
 				case 8:
+					multiAddressBook.printBook();
+					break;
+				case 9:
 					multiAddressBook.printContactsInBook();
 					break;
 				case 0:

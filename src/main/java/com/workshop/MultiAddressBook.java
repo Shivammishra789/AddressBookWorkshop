@@ -99,6 +99,31 @@ public class MultiAddressBook {
 			}
 		}
 	}
+	
+	//count number of contacts in all address books using city or state name
+		public void countContacts() {
+			while (true) {
+				System.out.println("Enter\n 1. By city\n 2. By state\n 0. for previous menu");
+				int choice = scanner.nextInt();
+				scanner.nextLine();
+				switch (choice) {
+				case 1:
+					System.out.println("Enter city: ");
+					String city = scanner.nextLine();
+					addressBookService.countByCity(city);
+					break;
+				case 2:
+					System.out.println("Enter state: ");
+					String state = scanner.nextLine();
+					addressBookService.countByState(state);
+					break;
+				case 0:
+					return;
+				default:
+					System.out.println("Entered choice is incorrect!.. please enter correct choice");
+				}
+			}
+		}
 
 	public void printBook() {
 		System.out.println("Address Book Present are: ");
