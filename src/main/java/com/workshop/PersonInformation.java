@@ -1,13 +1,13 @@
 package com.workshop;
 
-public class ContactDetails{
+public class PersonInformation{
 
 	//variables
 	private String firstName, lastName, address, city, state, zip, phoneNo, emailId;
 
-	public ContactDetails() {}
+	public PersonInformation() {}
 
-	public ContactDetails(String firstName, String lastName, String address, String city, String state, String zip,
+	public PersonInformation(String firstName, String lastName, String address, String city, String state, String zip,
 			String phoneNo, String emailId) {
 		super();
 		this.firstName = firstName;
