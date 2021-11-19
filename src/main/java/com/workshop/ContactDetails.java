@@ -6,7 +6,7 @@ public class ContactDetails{
 	private String firstName, lastName, address, city, state, zip, phoneNo, emailId;
 
 	public ContactDetails() {}
-	
+
 	public ContactDetails(String firstName, String lastName, String address, String city, String state, String zip,
 			String phoneNo, String emailId) {
 		super();
@@ -19,7 +19,7 @@ public class ContactDetails{
 		this.phoneNo = phoneNo;
 		this.emailId = emailId;
 	}
-	
+
 
 	public String getFirstName() {
 		return firstName;

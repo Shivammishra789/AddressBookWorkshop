@@ -161,7 +161,9 @@ public class AddressBookService {
 	
 	//search contact by city name
 	public void searchByCity(String city) {
-		List<ContactDetails> collect = addressBookList.stream().filter(p -> p.getCity().equalsIgnoreCase(city)).collect(Collectors.toList());
+		List<ContactDetails> collect = addressBookList.stream()
+													  .filter(p -> p.getCity().equalsIgnoreCase(city))
+													  .collect(Collectors.toList());
 		for (ContactDetails contact : collect) {
 			System.out.println("Search result: " + contact);
 		}
@@ -169,7 +171,9 @@ public class AddressBookService {
 
 	//search contact by state name
 	public void searchByState(String state) {
-		List<ContactDetails> collect = addressBookList.stream().filter(p -> p.getState().equalsIgnoreCase(state)).collect(Collectors.toList());
+		List<ContactDetails> collect = addressBookList.stream()
+				                                      .filter(p -> p.getState().equalsIgnoreCase(state))
+				                                      .collect(Collectors.toList());
 		for (ContactDetails contact : collect) {
 			System.out.println("Search result: " + contact);
 		}
