@@ -7,13 +7,11 @@ public class AddressBook {
 	public static void main(String[] args) {
 		Scanner scanner = new Scanner(System.in);
 		MultipleAddressBook multiAddressBook = new MultipleAddressBook();
-		boolean flag = true;
-		
-		while (flag) {
-			System.out.println("Enter \n 1. Add new AddressBook\n 2. Add contact in AddressBook\n "
-					+ "3. Edit the contact in AddressBook\n 4. Delete the contact in AddressBook\n 5. Delete the AddressBook\n "
-					+ "6. Search Contact By City and State in AddressBook\n 7. Count Number of Contacts By City and State in AddressBook\n"
-					+ " 8. Print the AddressBook\n 9. Print the contacts in AddressBook\n 10. sort contact by name \n 0. Exit Applcation");
+		while (true) {
+			System.out.println("Enter \n 1. Add new AddressBook\n 2. Add contact in AddressBook\n " +
+					"3. Edit the contact in AddressBook\n 4. Delete the contact in AddressBook\n 5. Delete the AddressBook\n " +
+					"6. Search Contact By City and State in AddressBook\n 7. Count Number of Contacts By City and State in AddressBook\n "+
+					"8. Print the AddressBook\n 9. Print the contacts in AddressBook\n 10. Sort the contacts in AddressBook\n 0. Exit Applcation");
 
 			int choice = scanner.nextInt();
 			switch (choice) {
@@ -45,16 +43,15 @@ public class AddressBook {
 				multiAddressBook.printContactsInBook();
 				break;
 			case 10:
-				multiAddressBook.sortByName();
+				multiAddressBook.sortContacts();
 				break;
 			case 0:
 				System.out.println("Exit Application");
-				flag = false;
+				System.exit(0);
 				break;
 			default:
 				System.out.println("Enter the wrong input");
 			}
 		}
 	}
-
 }

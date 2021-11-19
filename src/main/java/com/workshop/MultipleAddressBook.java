@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 
 public class MultipleAddressBook {
 	Scanner scanner = new Scanner(System.in);
+
 	PersonInformation person = new PersonInformation();
 	List<PersonInformation> contactList = new ArrayList<>();
 	HashMap<String, Contact> contactService = new HashMap<>();
@@ -30,17 +31,20 @@ public class MultipleAddressBook {
 		}
 	}
 
+	//add contact in book
 	public void addContact() {
 		System.out.println("Enter the name of Address book to add the contact.");
 		String newContact = scanner.nextLine();
 		Contact addressBook = contactService.get(newContact);
 		if (addressBook != null) {
 			contactService.get(newContact).addContact();
-		} else {
+		}
+		else {
 			System.out.println("No address book with this name");
 		}
 	}
 
+	//edit contact in address book
 	public void editContactInBook() {
 		System.out.println("Enter Name to Edit Address Book: ");
 		String editBookName = scanner.next();
@@ -52,6 +56,7 @@ public class MultipleAddressBook {
 		}
 	}
 
+	//delete address book
 	public void deleteAddressBook() {
 		System.out.println("Enter Name to Delete Address Book: ");
 		String bookName = scanner.next();
@@ -63,6 +68,7 @@ public class MultipleAddressBook {
 		}
 	}
 
+	//delete contact in address book
 	public void deleteContactInBook() {
 		System.out.println("Enter Name to delete the contacts from Address Book : ");
 		String bookName = scanner.next();
@@ -74,7 +80,7 @@ public class MultipleAddressBook {
 		}
 	}
 
-	// search contacts using city or state name
+	//search contacts using city or state name
 	public void searchContacts() {
 		while (true) {
 			System.out.println("Enter\n 1. By city\n 2. By state\n 0. for previous menu");
@@ -99,7 +105,7 @@ public class MultipleAddressBook {
 		}
 	}
 
-	// count number of contacts in all address books using city or state name
+	//count number of contacts in all address books using city or state name
 	public void countContacts() {
 		while (true) {
 			System.out.println("Enter\n 1. By city\n 2. By state\n 0. for previous menu");
@@ -124,12 +130,38 @@ public class MultipleAddressBook {
 		}
 	}
 
-	// search contact by state name
+	//count number of contacts in all address books using city or state name
+	public void sortContacts() {
+		while (true) {
+			System.out.println("Enter\n 1. By name\n 2. By city\n 3. By state\n 4. By zip code\n0. for previous menu");
+			int choice = scanner.nextInt();
+			scanner.nextLine();
+			switch (choice) {
+			case 1:
+				sortByName();
+				break;
+			case 2:
+				sortByCity();
+				break;
+			case 3:
+				sortByState();
+				break;
+			case 4:
+				sortByZip();
+				break;
+			case 0:
+				return;
+			default:
+				System.out.println("Entered choice is incorrect!.. please enter correct choice");
+			}
+		}
+	}
+
+	//search contact by state name
 	public void searchByState(String state) {
 		for (Map.Entry<String, Contact> entry : contactService.entrySet()) {
 			List<PersonInformation> contactListByState = entry.getValue().contactList;
-			List<PersonInformation> collect = contactListByState.stream()
-					.filter(p -> p.getState().equalsIgnoreCase(state)).collect(Collectors.toList());
+			List<PersonInformation> collect = contactListByState.stream().filter(p -> p.getState().equalsIgnoreCase(state)).collect(Collectors.toList());
 			for (PersonInformation contactsss : collect) {
 				System.out.println("Search result: " + contactsss);
 			}
@@ -137,51 +169,77 @@ public class MultipleAddressBook {
 		System.out.println(" ");
 	}
 
-	// search contact by city name
+	//search contact by city name
 	public void searchByCity(String city) {
 		for (Map.Entry<String, Contact> entry : contactService.entrySet()) {
 			List<PersonInformation> contactListByCity = entry.getValue().contactList;
-			List<PersonInformation> collect = contactListByCity.stream().filter(p -> p.getCity().equalsIgnoreCase(city))
-					.collect(Collectors.toList());
+			List<PersonInformation> collect = contactListByCity.stream().filter(p -> p.getCity().equalsIgnoreCase(city)).collect(Collectors.toList());
 			for (PersonInformation contact : collect) {
 				System.out.println("Search result: " + contact);
 			}
 		}
 	}
 
-	// count contact by city name
+	//count contact by city name
 	public void countByCity(String cityName) {
 		for (Map.Entry<String, Contact> entry : contactService.entrySet()) {
 			System.out.println("The contacts in the Book of < " + entry.getKey() + " > are!...");
 			List<PersonInformation> contactListByCity = entry.getValue().contactList;
-			long countContactsByCity = contactListByCity.stream().filter(g -> g.getCity().equalsIgnoreCase(cityName))
-					.count();
+			long countContactsByCity = contactListByCity.stream().filter(g -> g.getCity().equalsIgnoreCase(cityName)).count();
 			System.out.println("Total Number of Contact from '" + cityName + "' city is " + countContactsByCity);
 		}
 	}
 
-	// count contact by state name
+	//count contact by state name
 	public void countByState(String stateName) {
 		for (Map.Entry<String, Contact> entry : contactService.entrySet()) {
 			System.out.println("The contacts in the Book of < " + entry.getKey() + " > are!...");
 			List<PersonInformation> contactListByState = entry.getValue().contactList;
-			long countContactsByState = contactListByState.stream()
-					.filter(g -> g.getState().equalsIgnoreCase(stateName)).count();
+			long countContactsByState = contactListByState.stream().filter(g -> g.getState().equalsIgnoreCase(stateName)).count();
 			System.out.println("Total Number of Contact from '" + stateName + "' state is" + countContactsByState);
 		}
 	}
 
-	public void sortByName() {
+	public void sortByName(){
 		for (Map.Entry<String, Contact> entry : contactService.entrySet()) {
 			System.out.println("The contacts in the Book of < " + entry.getKey() + " > are!...");
 			List<PersonInformation> contactListByState = entry.getValue().contactList;
 			List<PersonInformation> list = contactListByState.stream().collect(Collectors.toList());
-			list.stream().sorted((g1, g2) -> ((String) g1.getFirstName()).compareTo(g2.getFirstName()))
-					.forEach(contact -> System.out.println(contact));
+			list.stream().sorted((g1, g2) -> ((String)g1.getFirstName()).compareTo(g2.getFirstName())).forEach(contact -> System.out.println(contact));
+		}
+	}
+	
+	//sort by state
+	public void sortByCity(){
+		for (Map.Entry<String, Contact> entry : contactService.entrySet()) {
+			System.out.println("The contacts in the Book of < " + entry.getKey() + " > are!...");
+			List<PersonInformation> contactListByState = entry.getValue().contactList;
+			List<PersonInformation> list = contactListByState.stream().collect(Collectors.toList());
+			list.stream().sorted((g1, g2) -> ((String)g1.getCity()).compareTo(g2.getCity())).forEach(contact -> System.out.println(contact));
+		}
+	}
+	
+	//sort by state
+	public void sortByState(){
+		for (Map.Entry<String, Contact> entry : contactService.entrySet()) {
+			System.out.println("The contacts in the Book of < " + entry.getKey() + " > are!...");
+			List<PersonInformation> contactListByState = entry.getValue().contactList;
+			List<PersonInformation> list = contactListByState.stream().collect(Collectors.toList());
+			list.stream().sorted((g1, g2) -> ((String)g1.getState()).compareTo(g2.getState())).forEach(contact -> System.out.println(contact));
+		}
+	}
+	
+	//sort by zip code
+	public void sortByZip(){
+		for (Map.Entry<String, Contact> entry : contactService.entrySet()) {
+			System.out.println("The contacts in the Book of < " + entry.getKey() + " > are!...");
+			List<PersonInformation> contactListByState = entry.getValue().contactList;
+			List<PersonInformation> list = contactListByState.stream().collect(Collectors.toList());
+			list.stream().sorted((g1, g2) -> (g1.getZip()).compareTo(g2.getZip())).forEach(contact -> System.out.println(contact));
 		}
 	}
 
-	// print name of address books
+	//print name of address books
 	public void printBook() {
 		System.out.println("Address Book Programs are: ");
 		for (Map.Entry<String, Contact> entry : contactService.entrySet()) {
