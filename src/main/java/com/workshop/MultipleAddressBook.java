@@ -14,6 +14,7 @@ public class MultipleAddressBook {
 	Scanner scanner = new Scanner(System.in);
 
 	static final String FILE_PATH = "ContactDetails.txt";
+	static final String CSV_FILE_PATH = "ContactDetails.csv";
 	PersonInformation person = new PersonInformation();
 	List<PersonInformation> contactList = new ArrayList<>();
 	HashMap<String, Contact> contactService = new HashMap<>();
@@ -260,8 +261,37 @@ public class MultipleAddressBook {
 		}
 		System.out.println(" ");
 	}
+	
+	//choose option to read and write csv file
+		public void readAndWriteFile() throws IOException {
+			while (true) {
+				System.out.println("Enter\n 1. Write in Txt File\n 2. Read from Txt File\n "+
+								   		   "3. Write in Csv File\n 4.  Read from Csv File\n"
+								         + " 0. for previous menu");
+				int choice = scanner.nextInt();
+				scanner.nextLine();
+				switch (choice) {
+				case 1:
+					writeToTxtFile();
+					break;
+				case 2:
+					readFromTxtFile();
+					break;
+				case 3:
+					writeToCsvFile();
+					break;
+				case 4:
+					readFromCsvFile();
+					break;
+				case 0:
+					return;
+				default:
+					System.out.println("Entered choice is incorrect!.. please enter correct choice");
+				}
+			}
+		}
 
-	public void writeToFile() throws IOException {
+	public void writeToTxtFile() throws IOException {
 		FileWriter fw = new FileWriter(FILE_PATH);
 		System.out.println("File Writing Started");
 
@@ -282,11 +312,43 @@ public class MultipleAddressBook {
 		fw.close();
 		System.out.println("File Writing closed");
 	}
-	public void readFromFile() throws IOException {
+	public void readFromTxtFile() throws IOException {
 		FileReader fileReader = new FileReader(FILE_PATH);
 		Scanner scanfile = new Scanner(fileReader);
 		scanfile.useDelimiter("\\Z");
 		System.out.println(scanfile.next() +" ");
 		scanfile.close();
 	}
+	
+	//write in the csv file
+		private void writeToCsvFile() throws IOException {
+			FileWriter fw = new FileWriter(CSV_FILE_PATH);
+			fw.write("Address Book Name,FirstName,LastName,Address,State,Zip,Phone Number,E-mail\n");
+			for (Map.Entry<String, Contact> entry : contactService.entrySet()) {
+				List<PersonInformation> contList = entry.getValue().contactList;
+				for(int i=0;i<contList.size();i++) {
+					fw.write(entry.getKey() +
+							"," + contList.get(i).getFirstName() + 
+							"," + contList.get(i).getLastName() + 
+							"," + contList.get(i).getAddress() +
+							"," + contList.get(i).getCity() +
+							"," + contList.get(i).getState() + 
+							"," + contList.get(i).getZip() + 
+							"," + contList.get(i).getPhoneNo() +
+							"," + contList.get(i).getEmailId()+"\n");
+				}
+			}
+			fw.close();
+		}
+
+		//read csv file
+		private void readFromCsvFile() throws IOException {
+			FileReader fr = new FileReader(CSV_FILE_PATH);
+			Scanner sc = new Scanner(fr);
+			sc.useDelimiter("\\Z");
+			System.out.println(sc.next() +" ");
+			sc.close();
+		}
+	
+	
 }

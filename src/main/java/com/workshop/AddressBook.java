@@ -14,7 +14,7 @@ public class AddressBook {
 					"3. Edit the contact in AddressBook\n 4. Delete the contact in AddressBook\n 5. Delete the AddressBook\n " +
 					"6. Search Contact By City and State in AddressBook\n 7. Count Number of Contacts By City and State in AddressBook\n "+
 					"8. Print the AddressBook\n 9. Print the contacts in AddressBook\n 10. Sort the contacts in AddressBook\n "+ 
-					"11. Write the contacts in AddressBook\n 12. Read the contacts from AddressBook\n 0. Exit Applcation");
+					"11. Read and Write the contacts in AddressBook\n 0. Exit Applcation");
 
 			int choice = scanner.nextInt();
 			switch (choice) {
@@ -49,10 +49,7 @@ public class AddressBook {
 				multiAddressBook.sortContacts();
 				break;
 			case 11:
-				multiAddressBook.writeToFile();
-				break;
-			case 12:
-				multiAddressBook.readFromFile();;
+				multiAddressBook.readAndWriteFile();
 				break;
 			case 0:
 				System.out.println("Exit Application");
