@@ -1,5 +1,8 @@
 package com.workshop;
 
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -7,9 +10,10 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
-public class MultipleAddressBook {
+public class MultipleAddressBook {	
 	Scanner scanner = new Scanner(System.in);
 
+	static final String FILE_PATH = "ContactDetails.txt";
 	PersonInformation person = new PersonInformation();
 	List<PersonInformation> contactList = new ArrayList<>();
 	HashMap<String, Contact> contactService = new HashMap<>();
@@ -68,7 +72,7 @@ public class MultipleAddressBook {
 		}
 	}
 
-	//delete contact in address book
+	//delete contacts in address book
 	public void deleteContactInBook() {
 		System.out.println("Enter Name to delete the contacts from Address Book : ");
 		String bookName = scanner.next();
@@ -133,7 +137,7 @@ public class MultipleAddressBook {
 	//count number of contacts in all address books using city or state name
 	public void sortContacts() {
 		while (true) {
-			System.out.println("Enter\n 1. By name\n 2. By city\n 3. By state\n 4. By zip code\n0. for previous menu");
+			System.out.println("Enter\n 1. By name\n 2. By city\n 3. By state\n 4. By zip code\n 0. for previous menu");
 			int choice = scanner.nextInt();
 			scanner.nextLine();
 			switch (choice) {
@@ -152,7 +156,7 @@ public class MultipleAddressBook {
 			case 0:
 				return;
 			default:
-				System.out.println("Entered choice is incorrect!.. please enter correct choice");
+				System.out.println("please enter correct choice");
 			}
 		}
 	}
@@ -200,6 +204,7 @@ public class MultipleAddressBook {
 		}
 	}
 
+	//search contact by state name
 	public void sortByName(){
 		for (Map.Entry<String, Contact> entry : contactService.entrySet()) {
 			System.out.println("The contacts in the Book of < " + entry.getKey() + " > are!...");
@@ -208,8 +213,8 @@ public class MultipleAddressBook {
 			list.stream().sorted((g1, g2) -> ((String)g1.getFirstName()).compareTo(g2.getFirstName())).forEach(contact -> System.out.println(contact));
 		}
 	}
-	
-	//sort by state
+
+	//search contact by city name
 	public void sortByCity(){
 		for (Map.Entry<String, Contact> entry : contactService.entrySet()) {
 			System.out.println("The contacts in the Book of < " + entry.getKey() + " > are!...");
@@ -218,8 +223,8 @@ public class MultipleAddressBook {
 			list.stream().sorted((g1, g2) -> ((String)g1.getCity()).compareTo(g2.getCity())).forEach(contact -> System.out.println(contact));
 		}
 	}
-	
-	//sort by state
+
+	//count contact by state name
 	public void sortByState(){
 		for (Map.Entry<String, Contact> entry : contactService.entrySet()) {
 			System.out.println("The contacts in the Book of < " + entry.getKey() + " > are!...");
@@ -228,7 +233,7 @@ public class MultipleAddressBook {
 			list.stream().sorted((g1, g2) -> ((String)g1.getState()).compareTo(g2.getState())).forEach(contact -> System.out.println(contact));
 		}
 	}
-	
+
 	//sort by zip code
 	public void sortByZip(){
 		for (Map.Entry<String, Contact> entry : contactService.entrySet()) {
@@ -247,11 +252,41 @@ public class MultipleAddressBook {
 		}
 	}
 
+	//print contacts of address books
 	public void printContactsInBook() {
 		for (Map.Entry<String, Contact> entry : contactService.entrySet()) {
 			System.out.println("The contacts in the Book of < " + entry.getKey() + " > are!...");
 			System.out.println(entry.getValue().contactList);
 		}
 		System.out.println(" ");
+	}
+
+	public void writeToFile() throws IOException {
+		FileWriter fw = new FileWriter(FILE_PATH);
+		System.out.println("File Writing Started");
+
+		for (Map.Entry<String, Contact> entry : contactService.entrySet()) {
+			fw.write("The contacts in the Book of < ''" + entry.getKey() + "'' > are : \n");
+			List<PersonInformation> contList = entry.getValue().contactList;
+			for(int i=0;i<contList.size();i++) {
+				fw.write("	{ First Name :" + contList.get(i).getFirstName() + 
+						", Last Name :" + contList.get(i).getLastName() + 
+						", Address : " + contList.get(i).getAddress() +
+						", City : " + contList.get(i).getCity() +
+						", State : " + contList.get(i).getState() + 
+						", Zip : " + contList.get(i).getZip() + 
+						", Phone Number : " + contList.get(i).getPhoneNo() +
+						", Email ID : " + contList.get(i).getEmailId()+" }\n");
+			}
+		}
+		fw.close();
+		System.out.println("File Writing closed");
+	}
+	public void readFromFile() throws IOException {
+		FileReader fileReader = new FileReader(FILE_PATH);
+		Scanner scanfile = new Scanner(fileReader);
+		scanfile.useDelimiter("\\Z");
+		System.out.println(scanfile.next() +" ");
+		scanfile.close();
 	}
 }
